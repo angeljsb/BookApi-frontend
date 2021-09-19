@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import Header from './Components/Header.jsx';
 import Api from './Utils/Api.js';
-import UserContext from './Context/UserContext.js';
+import UserContext from './Context/UserContext.jsx';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={user}>
+        <Header/>
       </UserContext.Provider>
     </div>
   );
