@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import Api from './Utils/Api.js';
+import UserContext from './Context/UserContext.js';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect( async () => {
+    const res = await Api.sessions.get();
+    if(res.ok) {
+      setUser(await res.json());
+    } else {
+      setUser({ id: 0 });
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserContext.Provider value={user}>
+      </UserContext.Provider>
     </div>
   );
 }
