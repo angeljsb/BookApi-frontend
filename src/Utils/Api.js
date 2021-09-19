@@ -5,53 +5,55 @@
 /**
  * Espacio de nombre que guarda la funcionalidad para las request
  * a la api
- * 
+ *
  * @namespace
  */
-const Api = {};
+const Api = {
+    host: "http://localhost:8080/BookApi/",
+};
 
 /**
  * Objeto que define una ruta de la api y permite hacer requests
  * de los cuatro tipos aceptados: "GET", "POST", "PUT", "DELETE"
- * 
+ *
  * @param {*} config Objeto de configuración
- * 
+ *
  * @constructor
  */
 Api.Route = function (config = {}) {
     this.path = config.path;
     this._params = new URLSearchParams();
     this._body = {};
-}
+};
 
 Api.Route.constructor = Api.Route;
 Api.Route.prototype = {
     sendRequest: async function (endpoint, data, content = "application/json") {
-        const res = await fetch("api/" + endpoint, {
-            mode: 'cors',
-            cache: 'no-cache', 
-            credentials: 'same-origin',
+        const res = await fetch(Api.host + "api/" + endpoint, {
+            mode: "no-cors",
+            cache: "no-cache",
+            credentials: "same-origin",
             headers: {
-              'Content-Type': content + '; charset=UTF-8',
-              'Accept-Encoding': '*'
+                "Content-Type": content + "; charset=UTF-8",
+                "Accept-Encoding": "*",
             },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
             ...data,
         });
         return res;
     },
     /**
      * Añade parametros al query de la consulta
-     * 
-     * @param {*} params Un objeto con los parametros a añadir en el 
+     *
+     * @param {*} params Un objeto con los parametros a añadir en el
      * query del url
      * @returns El objeto this para seguir construyendo la consulta
      * @function
      */
     params: function (params = {}) {
         this._params = new URLSearchParams();
-        for(let i in params) {
+        for (let i in params) {
             this.addParam(i, params[i]);
         }
         return this;
@@ -67,8 +69,8 @@ Api.Route.prototype = {
     },
     /**
      * Cambia el body que será enviado en la request
-     * 
-     * @param {*} body El cuerpo de la consulta. Puede ser un objeto 
+     *
+     * @param {*} body El cuerpo de la consulta. Puede ser un objeto
      * FormData o un objeto a pasar en formato json
      * @returns El objeto this para seguir construyendo la consulta
      * @function
@@ -80,7 +82,7 @@ Api.Route.prototype = {
     /**
      * Realiza una petición GET a la ruta correspondiente a este
      * objeto. Si el objeto tiene un body, este es ignorado
-     * 
+     *
      * @returns La respuesta de la petición
      * @async @function
      */
@@ -90,13 +92,13 @@ Api.Route.prototype = {
             endpoint = endpoint + "?" + this._params.toString();
         }
         return this.sendRequest(endpoint, {
-            method: "GET"
+            method: "GET",
         });
     },
     /**
      * Realiza una petición POST a la ruta correspondiente a este
      * objeto, con el body y los parametros correspondientes
-     * 
+     *
      * @returns La respuesta de la petición
      * @async @function
      */
@@ -111,19 +113,23 @@ Api.Route.prototype = {
             body = JSON.stringify(body);
             content = "application/json";
         }
-        return this.sendRequest(endpoint, {
-            method: "POST",
-            body,
-        }, content);
+        return this.sendRequest(
+            endpoint,
+            {
+                method: "POST",
+                body,
+            },
+            content
+        );
     },
     /**
      * Realiza una petición PUT a la ruta correspondiente a este
      * objeto, con el body y los parametros correspondientes.
-     * 
+     *
      * En realidad, se envía una petición POST con el parametro
      * especial _METHOD = PUT para que el servidor lo interprete
      * como una petición de este tipo
-     * 
+     *
      * @returns La respuesta de la petición
      * @async @function
      */
@@ -136,19 +142,23 @@ Api.Route.prototype = {
             body = JSON.stringify(body);
             content = "application/json";
         }
-        return this.sendRequest(endpoint, {
-            method: "POST",
-            body,
-        }, content);
+        return this.sendRequest(
+            endpoint,
+            {
+                method: "POST",
+                body,
+            },
+            content
+        );
     },
     /**
      * Realiza una petición DELETE a la ruta correspondiente a este
      * objeto. Si el objeto tiene un body, este es ignorado
-     * 
+     *
      * En realidad, se envía una petición POST con el parametro
      * especial _METHOD = DELETE para que el servidor lo interprete
      * como una petición de este tipo
-     * 
+     *
      * @returns La respuesta de la petición
      * @async @function
      */
@@ -156,12 +166,21 @@ Api.Route.prototype = {
         this._params.append("_METHOD", "DELETE");
         const endpoint = this.path + "?" + this._params.toString();
         return this.sendRequest(endpoint, {
-            method: "POST"
+            method: "POST",
         });
     },
 };
 
-Api.routes = ["users", "stories", "chapters", "genres", "sessions", "tags", "lectures", "elements"];
+Api.routes = [
+    "users",
+    "stories",
+    "chapters",
+    "genres",
+    "sessions",
+    "tags",
+    "lectures",
+    "elements",
+];
 
 // No los declaré en un bucle para que fuera más legible
 Api.users = new Api.Route({ path: "users" });
