@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import TextInput from './TextInput';
 
 const passwordMessage = (pass) => {
-  if (pass && pass.length < 8)
+  if (!pass)
+    return "";
+  if (pass.length < 8)
     return "La contraseña debe tener un minimo de 8 carácteres";
+  if (!/\w/.test(pass))
+    return "La contraseña debe tener al menos un caracter alfanumerico";
+  if (!/\d/.test(pass))
+    return "La contraseña debe tener al menos un caracter númerico";
+  if (!/\W/.test(pass))
+    return "La contraseña debe tener al menos un signo de puntuación";
   return "";
 }
 
@@ -14,6 +22,16 @@ const emailMessage = (email) => {
     return "No se encuentra el caracter @";
   if (!/@.+/.test(email))
     return "Debe haber algo luego del caracter @";
+  if (!/.+@/.test(email))
+    return "Debe haber algo antes del caracter @";
+  return "";
+}
+
+const usernameMessage = (username) => {
+  if (!username)
+    return "";
+  if (/^\d+$/.test(username))
+    return "No pueden ser solo caracteres númericos";
   return "";
 }
 
@@ -81,7 +99,7 @@ const Signup = (props = {}) => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const usernameError = "";
+  const usernameError = usernameMessage(username);
   const emailError = emailMessage(email);
   const passwordError = passwordMessage(password);
   const passwordConfirmError = password === passwordConfirm
