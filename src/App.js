@@ -25,13 +25,48 @@ function App() {
     hiddeForms: () => setModalOpen(false),
   }
 
+  const onLogin = (form) => {
+    const username = form["username"];
+    const password = form["password"];
+
+    Api.sessions.body({ username, password }).post()
+    .then(async (res) => {
+      if (res.ok) {
+        setUser(await res.json());
+      } else {
+        setUser({ id: 0 });
+      }
+    });
+  }
+
+  const onSignup = (form) => {
+    const email = form["email"];
+    const username = form["username"];
+    const password = form["password"];
+
+    Api.sessions.body({ email, username, password }).post()
+    .then(async (res) => {
+      if (res.ok) {
+        setUser(await res.json());
+      } else {
+        setUser({ id: 0 });
+      }
+    });
+  }
+
   return user === null ? (
     <div />
   ) : (
     <div className="App">
       <UserContext.Provider value={user}>
         <Header actions={actions} />
-        {user.id === 0 && modalOpen && <LoginModal/>}
+        {(user.id === 0 && modalOpen) &&  
+        <LoginModal 
+          open={modalOpen} 
+          setOpen={setModalOpen}
+          onLogin={onLogin}
+          onSignup={onSignup}
+        />}
       </UserContext.Provider>
     </div>
   );

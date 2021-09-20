@@ -5,6 +5,8 @@ const Forms = React.lazy(() => import("./UserForms.jsx"));
 const LoginModal = (props = {}) => {
   const open = props.open;
   const setOpen = props.setOpen;
+  const onLogin = props.onLogin;
+  const onSignup = props.onSignup;
 
   const close = () => setOpen(false);
 
@@ -12,7 +14,7 @@ const LoginModal = (props = {}) => {
     <div className="login-modal__background" onClick={close}></div>
     <div className="login-modal__body">
       <Suspense fallback={<div>Loading...</div>}>
-        <Forms close={close}></Forms>
+        <Forms onLogin={onLogin} onSignup={onSignup} close={close}></Forms>
       </Suspense>
     </div>
   </div>
