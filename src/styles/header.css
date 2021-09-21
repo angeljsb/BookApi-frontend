@@ -7,4 +7,17 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   background-color: #20c3ff;
+  color: white;
+}
+
+.header__end button {
+  padding: 0.5rem;
+  border: 0px;
+  background-color: transparent;
+  border-radius: 100%;
+  color: white;
+}
+
+.header__end button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }

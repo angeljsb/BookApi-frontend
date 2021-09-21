@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import UserContext from '../Context/UserContext.jsx';
+import { CgLogIn } from 'react-icons/cg';
 import Logo from './Logo.jsx';
 import '../styles/header.css';
 
@@ -17,7 +18,7 @@ const Header = (props = {}) => {
         <div className="header__end">
             {logged
                 ? <button>Perfil</button>
-                : <button onClick={actions.showForms}>Iniciar Sesión</button>
+                : <button onClick={actions.showForms}><CgLogIn size="2rem" /></button>
             }
         </div>
     </header>;
