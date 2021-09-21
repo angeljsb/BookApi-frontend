@@ -1,0 +1,42 @@
+.story-card {
+  background-color: #dadada;
+  width: 400px;
+  height: 280px;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+.story-card__body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.story-card__info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.story-card__title {
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0.25rem;
+}
+
+.story-card__sinopsis {
+  font-size: 0.75rem;
+  flex-grow: 1;
+}
+
+.story-card__cover {
+  width: 50%;
+  height: 100%;
+}
+
+.story-card__image {
+  width: 100%;
+  height: 100%;
+  box-shadow: 2px 4px 6px 4px rgba(61, 42, 42, 0.2);
+}
