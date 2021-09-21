@@ -1,0 +1,50 @@
+.user-forms__title {
+  margin: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.user-forms__content {
+  text-align: left;
+}
+
+.user-forms__switch {
+  color: #20c3ff;
+  text-decoration: underline;
+  text-align: left;
+}
+
+.user-forms__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.user-forms__options * {
+  margin-left: 10px;
+}
+
+.user-forms__button {
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: larger;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+}
+
+.user-forms__button--primary {
+  background-color: blue;
+  color: white;
+}
+
+.user-forms__button--primary:hover {
+  background-color: #0000cf;
+}
+
+.user-forms__button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}

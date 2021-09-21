@@ -4,13 +4,13 @@ import Logo from './Logo.jsx';
 import '../styles/header.css';
 
 const Header = (props = {}) => {
-    const actions = props.actions || {};
+    const { actions, ...otherProps } = props;
 
     const user = useContext(UserContext);
 
     const logged = user && user.id > 0;
 
-    return <header className="header" {...props}>
+    return <header className="header" {...otherProps}>
         <div className="header__start">
             <Logo />
         </div>

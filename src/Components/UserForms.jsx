@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TextInput from './TextInput';
+import '../styles/user-forms.css';
 
 const passwordMessage = (pass) => {
   if (!pass)
@@ -81,8 +82,8 @@ const Login = (props = {}) => {
       </div>
       <div className="user-forms__footer">
         <div className="user-forms__options">
-          {close && <button onClick={close}>Cerrar</button>}
-          <button type="submit" disabled={disabled} >Enviar</button>
+          {close && <button className="user-forms__button user-forms__button--secondary" onClick={close}>Cerrar</button>}
+          <button type="submit" className="user-forms__button user-forms__button--primary" disabled={disabled} >Enviar</button>
         </div>
       </div>
     </form>
@@ -137,8 +138,8 @@ const Signup = (props = {}) => {
       </div>
       <div className="user-forms__footer">
         <div className="user-forms__options">
-          {close && <button onClick={close}>Cerrar</button>}
-          <button type="submit" disabled={disabled}>Enviar</button>
+          {close && <button className="user-forms__button user-forms__button--secondary" onClick={close}>Cerrar</button>}
+          <button type="submit" className="user-forms__button user-forms__button--primary" disabled={disabled}>Enviar</button>
         </div>
       </div>
     </form>

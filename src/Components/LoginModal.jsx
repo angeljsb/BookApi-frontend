@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import '../styles/login-modal.css';
 
 const Forms = React.lazy(() => import("./UserForms.jsx"));
 
@@ -14,7 +15,7 @@ const LoginModal = (props = {}) => {
     <div className="login-modal__background" onClick={close}></div>
     <div className="login-modal__body">
       <Suspense fallback={<div>Loading...</div>}>
-        <Forms onLogin={onLogin} onSignup={onSignup} close={close}></Forms>
+        <Forms onLogin={onLogin} onSignup={onSignup} close={close} />
       </Suspense>
     </div>
   </div>

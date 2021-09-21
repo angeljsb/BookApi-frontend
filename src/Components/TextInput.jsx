@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/text-input.css';
 
 const TextInput = (props = {}) => {
   const { label, id, type, error, ...otherProps } = props;
@@ -7,9 +8,15 @@ const TextInput = (props = {}) => {
 
   const secureType = (type && posibleTypes.includes(type)) ? type : "text";
 
-  return <div className={"input__container input__container--" + (error ? "error" : "success")}>
+  const success = (!props.required || props.value) && !error;
+  let containerClasses = "input__container";
+  if (success || error) {
+    containerClasses += ` input__container--${success ? "success" : "error"}`;
+  }
+
+  return <div className={containerClasses}>
     {label && <label className="input__label" htmlFor={id}>{label}</label>}
-    <input type={secureType} id={id} {...otherProps} />
+    <input className="input__area" type={secureType} id={id} {...otherProps} />
     {error && <div className="input__message">{error}</div>}
   </div>
 }

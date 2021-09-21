@@ -1,0 +1,46 @@
+.input__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.25rem;
+}
+
+.input__label {
+  font-weight: 700;
+}
+
+.input__area {
+  padding: 0.5rem;
+  width: 15rem;
+  outline: none;
+  font-size: large;
+  border: 3px solid #b6b6b6;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.input__container--error .input__area {
+  border-color: #ff4747;
+}
+
+.input__container--success .input__area {
+  border-color: #7bff47;
+}
+
+.input__area:hover {
+  border-color: #515151;
+}
+
+.input__area:focus {
+  border-color: #20c3ff!important;
+}
+
+.input__container--error .input__message {
+  padding: 0.2rem;
+  background-color: #ffa1a1;
+  border-radius: 10px;
+  width: 16rem;
+  font-size: small;
+  text-align: left;
+}
