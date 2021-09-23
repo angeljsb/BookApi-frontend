@@ -1,6 +1,7 @@
 import { MdSearch } from "react-icons/md";
 import Accordion from "./Accordion";
 import "../styles/stories.css";
+import StoryCard from "./StoryCard";
 
 const Search = (props = {}) => {
   const value = props.value;
@@ -27,10 +28,21 @@ const Filters = (props = {}) => {
   </div>;
 }
 
+const Library = (props = {}) => {
+  const stories = props.stories;
+
+  const cards = [<StoryCard/>, <StoryCard/>];//stories.map((story, index) => <StoryCard key={index} story={story} />);
+
+  return <div className="stories__library">
+    {cards}
+  </div>;
+}
+
 const Stories = (props = {}) => {
   return <div className="stories">
     <Search/>
     <Filters/>
+    <Library/>
   </div>;
 }
 

@@ -1,5 +1,14 @@
 .stories {
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
+  gap: 1rem;
+}
+
+.stories__library {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .stories-search {

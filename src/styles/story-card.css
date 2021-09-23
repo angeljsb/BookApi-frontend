@@ -1,10 +1,11 @@
 .story-card {
-  background-color: #dadada;
-  width: 400px;
-  height: 280px;
-  margin: 2rem;
-  padding: 2rem;
+  background-color: #f7f9f9;
+  width: 300px;
+  height: 190px;
+  padding: 1.25rem;
+  margin: 5px;
   border-radius: 20px;
+  box-shadow: 2px 4px 6px 2px rgba(0, 0, 0, 0.25);
 }
 
 .story-card__body {
@@ -21,11 +22,13 @@
 
 .story-card__title {
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  color: #0f0f0f;
   margin: 0.25rem;
 }
 
 .story-card__sinopsis {
+  color: #4d4d4d;
   font-size: 0.75rem;
   flex-grow: 1;
 }
@@ -38,5 +41,4 @@
 .story-card__image {
   width: 100%;
   height: 100%;
-  box-shadow: 2px 4px 6px 4px rgba(61, 42, 42, 0.2);
 }
