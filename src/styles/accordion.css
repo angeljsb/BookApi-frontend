@@ -1,0 +1,21 @@
+.accordion {
+  background-color: white;
+  width: 100%;
+}
+
+.accordion__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #dadada;
+  cursor: pointer;
+}
+
+.accordion__button:hover {
+  background-color: #b6b6b6;
+}
+
+.accordion--close .accordion__container {
+  display: none;
+}

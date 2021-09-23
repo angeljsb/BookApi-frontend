@@ -44,3 +44,11 @@ button {
     transform: rotate(360deg);
   }
 }
+
+.body {
+  display: flex;
+}
+
+.stories {
+  flex-grow: 1;
+}

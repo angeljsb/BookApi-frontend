@@ -1,0 +1,31 @@
+.stories {
+  padding: 2rem;
+}
+
+.stories-search {
+  padding: 5px;
+  background-color: white;
+  border: 2px solid #20c3ff;
+  border-radius: 15px;
+}
+
+.stories-search__area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stories-search__input {
+  outline: none;
+  border: 0px;
+  color: #4d4d4d;
+  font-size: larger;
+  flex-grow: 1;
+}
+
+.stories-search__button {
+  background-color: transparent;
+  border: 0px;
+  border-radius: 100%;
+  display: flex;
+}
