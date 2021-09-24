@@ -19,17 +19,20 @@ const StoryCard = (props = {}) => {
     const color = "#ffd10f"
 
     for(let i = 0; i<5; i++) {
+      const attributes = {
+        color, size, key: i
+      };
       if (i>1) {
-        stars.push(<ImStarFull color={color} size={size} />);
+        stars.push(<ImStarFull { ...attributes } />);
         rest -= 1;
         continue;
       }
       if(i>=0.5) {
-        stars.push(<ImStarHalf color={color} size={size} />);
+        stars.push(<ImStarHalf { ...attributes } />);
         rest = 0;
         continue;
       }
-      stars.push(<ImStarEmpty color={color} size={size} />);
+      stars.push(<ImStarEmpty { ...attributes } />);
     }
 
     return stars.reverse();

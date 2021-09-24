@@ -12,6 +12,13 @@
   color: #20c3ff;
   text-decoration: underline;
   text-align: left;
+  outline: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.user-forms__switch:active {
+  color: #ff4747;
 }
 
 .user-forms__options {

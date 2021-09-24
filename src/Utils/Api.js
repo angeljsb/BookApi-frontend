@@ -30,7 +30,7 @@ Api.Route.constructor = Api.Route;
 Api.Route.prototype = {
   sendRequest: async function (endpoint, data, content = "application/json") {
     const res = await fetch(Api.host + "api/" + endpoint, {
-      mode: "no-cors",
+      mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
       headers: {
@@ -53,6 +53,7 @@ Api.Route.prototype = {
    */
   params: function (params = {}) {
     this._params = new URLSearchParams();
+    if (params === null) return this;
     for (let i in params) {
       if (params[i] instanceof Array) {
         params[i].forEach((val) => this.addParam(i, val));
@@ -110,9 +111,6 @@ Api.Route.prototype = {
   post: async function (params = {}) {
     this.body(params);
     let endpoint = this.path;
-    if (this._params.toString()) {
-      endpoint = endpoint + "?" + this._params.toString();
-    }
     let body = this._body;
     let content = "multipart/form-data";
     if (!(body instanceof FormData)) {

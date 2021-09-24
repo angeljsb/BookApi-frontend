@@ -78,11 +78,11 @@ const Login = (props = {}) => {
         <TextInput required type="text" onChange={handleChange(setUsername)} value={username} error={usernameError} id="login-username" name="username" label="Username o Email" />
         <TextInput required type="password" onChange={handleChange(setPassword)} value={password} error={passwordError} id="login-password" name="password" label="Contraseña" />
         <TextInput required type="password" onChange={handleChange(setPasswordConfirm)} value={passwordConfirm} error={passwordConfirmError} id="login-password-confirm" name="password-confirm" label="Repetir Contraseña" />
-        <a onClick={handleToggle} href="#" className="user-forms__switch">No tengo una cuenta</a>
+        <button onClick={handleToggle} href="#" className="user-forms__switch">No tengo una cuenta</button>
       </div>
       <div className="user-forms__footer">
         <div className="user-forms__options">
-          {close && <button className="user-forms__button user-forms__button--secondary" onClick={close}>Cerrar</button>}
+          {close && <button type="button" className="user-forms__button user-forms__button--secondary" onClick={close}>Cerrar</button>}
           <button type="submit" className="user-forms__button user-forms__button--primary" disabled={disabled} >Enviar</button>
         </div>
       </div>
@@ -134,11 +134,11 @@ const Signup = (props = {}) => {
         <TextInput required type="email" onChange={handleChange(setEmail)} value={email} error={emailError} id="signup-email" name="email" label="Email" />
         <TextInput required type="password" onChange={handleChange(setPassword)} value={password} error={passwordError} id="signup-password" name="password" label="Contraseña" />
         <TextInput required type="password" onChange={handleChange(setPasswordConfirm)} value={passwordConfirm} error={passwordConfirmError} id="signup-password-confirm" name="password-confirm" label="Repetir Contraseña" />
-        <a onClick={handleToggle} href="#" className="user-forms__switch">¿Ya tienes una cuenta?</a>
+        <button onClick={handleToggle} href="#" className="user-forms__switch">¿Ya tienes una cuenta?</button>
       </div>
       <div className="user-forms__footer">
         <div className="user-forms__options">
-          {close && <button className="user-forms__button user-forms__button--secondary" onClick={close}>Cerrar</button>}
+          {close && <button type="button" className="user-forms__button user-forms__button--secondary" onClick={close}>Cerrar</button>}
           <button type="submit" className="user-forms__button user-forms__button--primary" disabled={disabled}>Enviar</button>
         </div>
       </div>

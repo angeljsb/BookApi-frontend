@@ -6,23 +6,20 @@ import Api from "./Utils/Api.js";
 import UserContext from "./Context/UserContext.jsx";
 import "./App.css";
 import Stories from "./Components/Stories.jsx";
+import useGet from "./Hooks/useGet.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [loading, result, error] = useGet("sessions");
   useEffect(() => {
-    const promise = Api.sessions.get();
-    promise
-      .then(async (res) => {
-        if (res.ok) {
-          setUser(await res.json());
-        } else {
-          setUser({ id: 0 });
-        }
-      })
-      .catch((e) => setUser({ id: 0 }));
-  }, []);
+    if (error) {
+      setUser({ id: 0 });
+    } else {
+      setUser(result);
+    }
+  }, [error, result]);
 
   const actions = {
     showForms: () => setModalOpen(true),
@@ -30,39 +27,34 @@ function App() {
   };
 
   const onLogin = (form) => {
-    const username = form["username"];
-    const password = form["password"];
+    const username = form["username"].value;
+    const password = form["password"].value;
 
-    Api.sessions
-      .body({ username, password })
-      .post()
-      .then(async (res) => {
-        if (res.ok) {
-          setUser(await res.json());
-        } else {
-          setUser({ id: 0 });
-        }
-      });
+    Api.sessions.post({ username, password }).then(async (res) => {
+      if (res.ok) {
+        setUser(await res.json());
+      } else {
+        console.log(await res.text());
+        setUser({ id: 0 });
+      }
+    });
   };
 
   const onSignup = (form) => {
-    const email = form["email"];
-    const username = form["username"];
-    const password = form["password"];
+    const email = form["email"].value;
+    const username = form["username"].value;
+    const password = form["password"].value;
 
-    Api.sessions
-      .body({ email, username, password })
-      .post()
-      .then(async (res) => {
-        if (res.ok) {
-          setUser(await res.json());
-        } else {
-          setUser({ id: 0 });
-        }
-      });
+    Api.users.post({ email, username, password }).then(async (res) => {
+      if (res.ok) {
+        setUser(await res.json());
+      } else {
+        setUser({ id: 0 });
+      }
+    });
   };
 
-  return user === null ? (
+  return loading ? (
     <div />
   ) : (
     <div className="App">
@@ -72,7 +64,7 @@ function App() {
           <Stories />
           <Sidebar />
         </div>
-        {user.id === 0 && modalOpen && (
+        {user?.id === 0 && modalOpen && (
           <LoginModal
             open={modalOpen}
             setOpen={setModalOpen}
