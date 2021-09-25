@@ -9,6 +9,7 @@ import "./App.css";
 import Stories from "./Components/Stories.jsx";
 import useGet from "./Hooks/useGet.jsx";
 import CheckList from "./Components/CheckList.jsx";
+import TagsInput from "./Components/TagsInput.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -69,6 +70,7 @@ function App() {
           <Stories />
           <Sidebar>
             <CheckList />
+            <TagsInput />
           </Sidebar>
         </div>
         {user?.id === 0 && modalOpen && (

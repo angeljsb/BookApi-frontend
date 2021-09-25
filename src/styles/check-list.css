@@ -1,12 +1,14 @@
 .check-list__list {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 
 .check-list__item {
   padding: 0.75rem;
   list-style: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .check-list__item:hover {
