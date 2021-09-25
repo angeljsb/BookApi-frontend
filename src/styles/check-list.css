@@ -1,0 +1,29 @@
+.check-list__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.check-list__item {
+  padding: 0.75rem;
+  list-style: none;
+  border-radius: 5px;
+}
+
+.check-list__item:hover {
+  background-color: #f7f9f9;
+}
+
+.check-list__item:active {
+  background-color: #d7d9d9;
+}
+
+.check-list__item-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.check-list__name {
+  flex-grow: 1;
+  text-align: left;
+}

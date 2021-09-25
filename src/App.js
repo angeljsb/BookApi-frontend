@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "./Components/Header.jsx";
 import LoginModal from "./Components/LoginModal.jsx";
 import Sidebar from "./Components/Sidebar.jsx";
+import Check from "./Components/Check.jsx";
 import Api from "./Utils/Api.js";
 import UserContext from "./Context/UserContext.jsx";
 import "./App.css";
 import Stories from "./Components/Stories.jsx";
 import useGet from "./Hooks/useGet.jsx";
+import CheckList from "./Components/CheckList.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,7 +67,9 @@ function App() {
         <Header actions={actions} />
         <div className="body">
           <Stories />
-          <Sidebar />
+          <Sidebar>
+            <CheckList />
+          </Sidebar>
         </div>
         {user?.id === 0 && modalOpen && (
           <LoginModal

@@ -1,0 +1,53 @@
+.check__input {
+  display: none;
+}
+
+.check__icon {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.check__label {
+  display: inline-block;
+  border: 2px solid #4d4d4d;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.check__input:hover ~ .check__label {
+  border-color: #0f0f0f;
+}
+
+.check__input:checked ~ .check__label {
+  border-color: #0f0f0f;
+}
+
+.check--checkbox .check__mark {
+  width: 100%;
+  height: 100%;
+}
+
+.check--radio .check__mark {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 100%;
+  margin-top: 0.15rem;
+  margin-left: 0.15rem;
+}
+
+.check__input:checked ~ .check__label .check__mark {
+  background-color: #20c3ff;
+}
+
+.check--checkbox .check__input:checked ~ .check__label .check__icon {
+  display: initial;
+}
+
+.check--checkbox .check__label {
+  border-radius: 0;
+}
+
+.check--radio .check__label {
+  border-radius: 100%;
+}
