@@ -32,9 +32,10 @@ function App() {
 
     Api.sessions.post({ username, password }).then(async (res) => {
       if (res.ok) {
-        setUser(await res.json());
+        const u = await res.json();
+        setUser(u);
+        window.localStorage.setItem("tkn", u.token);
       } else {
-        console.log(await res.text());
         setUser({ id: 0 });
       }
     });
@@ -47,7 +48,9 @@ function App() {
 
     Api.users.post({ email, username, password }).then(async (res) => {
       if (res.ok) {
-        setUser(await res.json());
+        const u = await res.json();
+        setUser(u);
+        window.localStorage.setItem("tkn", u.token);
       } else {
         setUser({ id: 0 });
       }

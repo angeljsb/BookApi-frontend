@@ -29,14 +29,22 @@ Api.Route = function (config = {}) {
 Api.Route.constructor = Api.Route;
 Api.Route.prototype = {
   sendRequest: async function (endpoint, data, content = "application/json") {
-    const res = await fetch(Api.host + "api/" + endpoint, {
+      const storage = window.localStorage;
+      const tkn = storage.getItem("tkn");
+      
+      const headers = {
+        "Content-Type": content + "; charset=UTF-8",
+        "Accept-Encoding": "*",
+      };
+      if (tkn) {
+          headers["Authorization"] = "Bearer " + tkn;
+      }
+      
+      const res = await fetch(Api.host + "api/" + endpoint, {
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
-      headers: {
-        "Content-Type": content + "; charset=UTF-8",
-        "Accept-Encoding": "*",
-      },
+      headers: headers,
       redirect: "follow",
       referrerPolicy: "no-referrer",
       ...data,
