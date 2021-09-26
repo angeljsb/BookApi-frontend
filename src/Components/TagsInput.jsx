@@ -3,24 +3,8 @@ import Tag from "./Tag";
 import "../styles/tags-input.css";
 
 const TagsInput = (props = {}) => {
-  const { /*tags, onAdd, onCancel,*/ ...otherProps } = props;
-  //const realTags = tags || [];
-  const [realTags, setRealTags] = useState([]);
-
-  const onAdd = (name) => {
-    const [...newTags] = realTags;
-    newTags.includes(name) || newTags.push(name);
-    setRealTags(newTags);
-  }
-
-  const onCancel = (name) => {
-    const [...newTags] = realTags;
-    const index = newTags.indexOf(name);
-    if (index > -1) {
-      newTags.splice(index, 1);
-      setRealTags(newTags);
-    }
-  }
+  const { tags, onAdd, onCancel, ...otherProps } = props;
+  const realTags = tags || [];
 
   const handleKeyUp = (e) => {
     const value = e.target.value;
@@ -30,7 +14,12 @@ const TagsInput = (props = {}) => {
     e.target.value = "";
   }
 
-  return <div className="tags-input">
+  const handleClick = (e) => {
+    const input = e.target.querySelector(".tags-input__input");
+    input?.focus();
+  }
+
+  return <div className="tags-input" onClick={handleClick}>
     {realTags.map((name, index) => <Tag key={index} onCancel={onCancel}>{name}</Tag>)}
     <input className="tags-input__input" type="text" name="tagName" maxLength="20" onKeyUp={handleKeyUp} { ...otherProps } />
   </div>

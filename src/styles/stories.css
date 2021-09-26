@@ -5,6 +5,18 @@
   gap: 1rem;
 }
 
+.stories__error-message {
+  text-align: left;
+  color: #ff4747;
+}
+
+.stories__load-message {
+  display: flex;
+  font-size: 0.75rem;
+  gap: 5px;
+  align-items: center;
+}
+
 .stories-search {
   padding: 5px;
   background-color: white;
@@ -32,4 +44,32 @@
   border: 0px;
   border-radius: 100%;
   display: flex;
+}
+
+.stories-filters {
+  display: flex;
+  background-color: #f7f9f9;
+}
+
+.stories-filters__section {
+  width: 33.33%;
+}
+
+.stories-filters__filter {
+  padding: 0.5rem;
+  height: 8rem;
+}
+
+.stories-filters__filter .tags-input {
+  height: -moz-available;
+  height: -webkit-fill-available;
+}
+
+.stories-filters__radio {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 8rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
 }

@@ -47,6 +47,7 @@
   border-radius: 15px;
   cursor: text;
   padding: 5px;
+  align-items: baseline;
 }
 
 .tags-input__input {
@@ -55,4 +56,5 @@
   color: #4d4d4d;
   font-size: 0.75rem;
   flex-grow: 1;
+  width: 5rem;
 }

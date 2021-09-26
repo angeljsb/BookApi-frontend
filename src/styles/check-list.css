@@ -1,7 +1,7 @@
 .check-list__list {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 0;
 }
 
 .check-list__item {
@@ -28,4 +28,5 @@
 .check-list__name {
   flex-grow: 1;
   text-align: left;
+  cursor: pointer;
 }

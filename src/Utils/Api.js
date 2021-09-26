@@ -24,29 +24,31 @@ Api.Route = function (config = {}) {
   this.path = config.path;
   this._params = new URLSearchParams();
   this._body = {};
+  this._signal = null;
 };
 
 Api.Route.constructor = Api.Route;
 Api.Route.prototype = {
   sendRequest: async function (endpoint, data, content = "application/json") {
-      const storage = window.localStorage;
-      const tkn = storage.getItem("tkn");
-      
-      const headers = {
-        "Content-Type": content + "; charset=UTF-8",
-        "Accept-Encoding": "*",
-      };
-      if (tkn) {
-          headers["Authorization"] = "Bearer " + tkn;
-      }
-      
-      const res = await fetch(Api.host + "api/" + endpoint, {
+    const storage = window.localStorage;
+    const tkn = storage.getItem("tkn");
+
+    const headers = {
+      "Content-Type": content + "; charset=UTF-8",
+      "Accept-Encoding": "*",
+    };
+    if (tkn) {
+      headers["Authorization"] = "Bearer " + tkn;
+    }
+
+    const res = await fetch(Api.host + "api/" + endpoint, {
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
       headers: headers,
       redirect: "follow",
       referrerPolicy: "no-referrer",
+      signal: this._signal,
       ...data,
     });
     return res;
@@ -92,6 +94,10 @@ Api.Route.prototype = {
     this._body = body;
     return this;
   },
+  signal: function (signal = null) {
+    if (signal) this._signal = signal;
+    return this;
+  },
   /**
    * Realiza una petición GET a la ruta correspondiente a este
    * objeto. Si el objeto tiene un body, este es ignorado
@@ -100,7 +106,7 @@ Api.Route.prototype = {
    * @async @function
    */
   get: async function (params = {}) {
-    this.params(params);
+    this._params = params;
     let endpoint = this.path;
     if (this._params.toString()) {
       endpoint = endpoint + "?" + this._params.toString();

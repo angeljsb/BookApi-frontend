@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Header from "./Components/Header.jsx";
 import LoginModal from "./Components/LoginModal.jsx";
-import Sidebar from "./Components/Sidebar.jsx";
 import Check from "./Components/Check.jsx";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Api from "./Utils/Api.js";
 import UserContext from "./Context/UserContext.jsx";
 import "./App.css";
-import Stories from "./Components/Stories.jsx";
 import useGet from "./Hooks/useGet.jsx";
-import CheckList from "./Components/CheckList.jsx";
-import TagsInput from "./Components/TagsInput.jsx";
+
+const Home = React.lazy(() => import("./Pages/Home.jsx"));
+const Story = React.lazy(() => import("./Pages/Story.jsx"));
 
 function App() {
   const [user, setUser] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [loading, result, error] = useGet("sessions");
+  const { loading, result, error } = useGet("sessions");
   useEffect(() => {
     if (error) {
       setUser({ id: 0 });
@@ -60,19 +60,29 @@ function App() {
     });
   };
 
+  const header = <Header actions={actions} />;
+
   return loading ? (
     <div />
   ) : (
     <div className="App">
       <UserContext.Provider value={user}>
-        <Header actions={actions} />
-        <div className="body">
-          <Stories />
-          <Sidebar>
-            <CheckList />
-            <TagsInput />
-          </Sidebar>
-        </div>
+        <Router>
+          <Switch>
+            <Route path="/:story">
+              <Suspense fallback={<div />}>
+                {header}
+                <Story />
+              </Suspense>
+            </Route>
+            <Route path="/">
+              <Suspense fallback={<div />}>
+                {header}
+                <Home />
+              </Suspense>
+            </Route>
+          </Switch>
+        </Router>
         {user?.id === 0 && modalOpen && (
           <LoginModal
             open={modalOpen}
