@@ -1,4 +1,5 @@
 import { ImStarEmpty, ImStarHalf, ImStarFull } from "react-icons/im";
+import { Link } from "react-router-dom";
 import "../styles/story-card.css";
 
 /*const story = {
@@ -19,38 +20,51 @@ const StoryCard = (props = {}) => {
     const size = "1rem";
     const color = "#ffd10f";
 
-    for(let i = 0; i<5; i++) {
+    for (let i = 0; i < 5; i++) {
       const attributes = {
-        color, size, key: i
+        color,
+        size,
+        key: i,
       };
-      if (rest>=1) {
-        stars.push(<ImStarFull { ...attributes } />);
+      if (rest >= 1) {
+        stars.push(<ImStarFull {...attributes} />);
         rest -= 1;
         continue;
       }
-      if(rest>=0.5) {
-        stars.push(<ImStarHalf { ...attributes } />);
+      if (rest >= 0.5) {
+        stars.push(<ImStarHalf {...attributes} />);
         rest = 0;
         continue;
       }
-      stars.push(<ImStarEmpty { ...attributes } />);
+      stars.push(<ImStarEmpty {...attributes} />);
     }
 
     return stars;
   };
 
-  return <div className="story-card">
-    <div className="story-card__body">
-      <div className="story-card__cover">
-      <img className="story-card__image" draggable={false} src={story.cover} alt={`${story.title}-cover`} />
-      </div>
-      <div className="story-card__info">
-        <h4 className="story-card__title">{story.title}</h4>
-        {story.rating && <div className="story-card__rating">{stars(story.rating)}</div>}
-        <p className="story-card__sinopsis">{story.sinopsis}</p>
-      </div>
+  return (
+    <div className="story-card">
+      <Link to={`/${story.slug}`}>
+        <div className="story-card__body">
+          <div className="story-card__cover">
+            <img
+              className="story-card__image"
+              draggable={false}
+              src={story.cover}
+              alt={`${story.title}-cover`}
+            />
+          </div>
+          <div className="story-card__info">
+            <h4 className="story-card__title">{story.title}</h4>
+            {story.rating && (
+              <div className="story-card__rating">{stars(story.rating)}</div>
+            )}
+            <p className="story-card__sinopsis">{story.sinopsis}</p>
+          </div>
+        </div>
+      </Link>
     </div>
-  </div>;
-}
+  );
+};
 
 export default StoryCard;

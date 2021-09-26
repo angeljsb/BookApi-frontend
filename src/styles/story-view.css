@@ -1,0 +1,18 @@
+.story-view {
+  display: flex;
+}
+
+.story-view__cover {
+  width: 200px;
+  margin: 1rem;
+}
+
+.story-view__image {
+  width: 100%;
+}
+
+.story-view__info {
+  flex-grow: 1;
+  text-align: left;
+  padding: 1rem;
+}
