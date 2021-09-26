@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import useGet from "../Hooks/useGet";
-import Accordion from "./Accordion";
+import { Accordion, Check, Spinner } from "./Globals.jsx";
 import CheckList from "./CheckList.jsx";
 import TagsInput from "./TagsInput.jsx";
-import Check from "./Check.jsx";
 import "../styles/stories.css";
 import Library from "./Library";
-import Spinner from "./Spinner";
 
 const Search = (props = {}) => {
   const value = props.value;

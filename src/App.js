@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Suspense } from "react";
 import Header from "./Components/Header.jsx";
 import LoginModal from "./Components/LoginModal.jsx";
-import Check from "./Components/Check.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Api from "./Utils/Api.js";
 import UserContext from "./Context/UserContext.jsx";
