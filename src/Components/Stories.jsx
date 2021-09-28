@@ -2,8 +2,7 @@ import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import useGet from "../Hooks/useGet";
 import { Accordion, Check, Spinner } from "./Globals.jsx";
-import CheckList from "./CheckList.jsx";
-import TagsInput from "./TagsInput.jsx";
+import { CheckList, TagsInput } from "./Input.jsx";
 import "../styles/stories.css";
 import Library from "./Library";
 
