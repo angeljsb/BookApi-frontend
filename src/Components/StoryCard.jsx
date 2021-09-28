@@ -50,7 +50,7 @@ const StoryCard = (props = {}) => {
             <img
               className="story-card__image"
               draggable={false}
-              src={story.cover}
+              src={story.cover || "curso.png"}
               alt={`${story.title}-cover`}
             />
           </div>

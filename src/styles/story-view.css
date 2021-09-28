@@ -16,3 +16,17 @@
   text-align: left;
   padding: 1rem;
 }
+
+.story-view--loading .story-view__cover {
+  background-color: lightgray;
+  animation: tinkle 500ms infinite;
+}
+
+@keyframes tinkle {
+  0% {
+    background-color: lightgray;
+  }
+  100% {
+    background-color: white;
+  }
+}
