@@ -4,6 +4,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp, MdDone } from "react-icons/md";
 import "../styles/accordion.css";
 import "../styles/check.css";
 import "../styles/spinner.css";
+import "../styles/genres-tags.css";
 
 const Accordion = (props = {}) => {
   const children = props.children;
@@ -100,4 +101,14 @@ const Tag = (props) => {
   );
 };
 
-export { Accordion, Check, Logo, Spinner, Tag };
+const Genre = (props = {}) => {
+  const { id, name, ...otherProps } = props.genre;
+
+  return (
+    <div className="genre" {...otherProps}>
+      {name}
+    </div>
+  );
+};
+
+export { Accordion, Check, Logo, Spinner, Tag, Genre };

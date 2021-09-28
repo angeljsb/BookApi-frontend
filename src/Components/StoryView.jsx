@@ -1,5 +1,5 @@
 import useGet from "../Hooks/useGet.jsx";
-import { Tag } from "./Globals.jsx";
+import { Tag, Genre } from "./Globals.jsx";
 import "../styles/story-view.css";
 
 const StoryView = (props = {}) => {
@@ -28,7 +28,12 @@ const StoryView = (props = {}) => {
         <div className="story-view__sinopsis">
           {result && <p>{result.sinopsis}</p>}
         </div>
-        <div className="story-view__genres"></div>
+        <div className="story-view__genres">
+          {result?.genres &&
+            result.genres.map((val, index) => (
+              <Genre key={index} genre={val} />
+            ))}
+        </div>
         <div className="story-view__tags">
           {result &&
             result.tags.map((val, index) => <Tag key={index}>{val.name}</Tag>)}
