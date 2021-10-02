@@ -15,6 +15,13 @@
   flex-grow: 1;
   text-align: left;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.story-view__sinopsis {
+  flex-grow: 1;
 }
 
 .story-view--loading .story-view__cover {
@@ -22,9 +29,41 @@
   animation: tinkle 500ms infinite;
 }
 
+ul.chapters__list li {
+  list-style: none;
+  padding: 0;
+}
+
+.chapters__h {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chapters__item {
+  display: flex;
+  background-color: #dadada;
+}
+
+.chapters__number {
+  width: 8.88%;
+}
+
+.chapters__title {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.chapters__published {
+  width: 33.33%;
+}
+
+.chapters__read {
+  width: 16.66%;
+}
+
 @keyframes tinkle {
   0% {
-    background-color: lightgray;
+    background-color: #dadada;
   }
   100% {
     background-color: white;

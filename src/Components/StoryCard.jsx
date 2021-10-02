@@ -1,4 +1,4 @@
-import { ImStarEmpty, ImStarHalf, ImStarFull } from "react-icons/im";
+import { Rating } from "./Globals.jsx";
 import { Link } from "react-router-dom";
 import "../styles/story-card.css";
 
@@ -11,36 +11,23 @@ import "../styles/story-card.css";
   finished: false
 };*/
 
+const LoadingCard = (props = {}) => {
+  return (
+    <div className="story-card loading">
+      <div className="story-card__body">
+        <div className="story-card__cover"></div>
+        <div className="story-card__info">
+          <h4 className="story-card__title"></h4>
+          <div className="story-card__rating"></div>
+          <p className="story-card__sinopsis"></p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const StoryCard = (props = {}) => {
   const story = props.story;
-
-  const stars = (rating) => {
-    let rest = rating;
-    const stars = [];
-    const size = "1rem";
-    const color = "#ffd10f";
-
-    for (let i = 0; i < 5; i++) {
-      const attributes = {
-        color,
-        size,
-        key: i,
-      };
-      if (rest >= 1) {
-        stars.push(<ImStarFull {...attributes} />);
-        rest -= 1;
-        continue;
-      }
-      if (rest >= 0.5) {
-        stars.push(<ImStarHalf {...attributes} />);
-        rest = 0;
-        continue;
-      }
-      stars.push(<ImStarEmpty {...attributes} />);
-    }
-
-    return stars;
-  };
 
   return (
     <div className="story-card">
@@ -57,7 +44,9 @@ const StoryCard = (props = {}) => {
           <div className="story-card__info">
             <h4 className="story-card__title">{story.title}</h4>
             {story.rating && (
-              <div className="story-card__rating">{stars(story.rating)}</div>
+              <div className="story-card__rating">
+                <Rating rating={story.rating}></Rating>
+              </div>
             )}
             <p className="story-card__sinopsis">{story.sinopsis}</p>
           </div>
@@ -66,5 +55,7 @@ const StoryCard = (props = {}) => {
     </div>
   );
 };
+
+export { LoadingCard };
 
 export default StoryCard;

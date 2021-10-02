@@ -9,6 +9,7 @@ import useGet from "./Hooks/useGet.jsx";
 
 const Home = React.lazy(() => import("./Pages/Home.jsx"));
 const Story = React.lazy(() => import("./Pages/Story.jsx"));
+const Write = React.lazy(() => import("./Pages/Write.jsx"));
 
 function App() {
   const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ function App() {
   const { loading, result, error } = useGet("sessions");
   useEffect(() => {
     if (error) {
-      setUser({ id: 0 });
+      setUser(false);
     } else {
       setUser(result);
     }
@@ -68,6 +69,12 @@ function App() {
       <UserContext.Provider value={user}>
         <Router>
           <Switch>
+            <Route path="/write">
+              <Suspense fallback={<div />}>
+                {header}
+                <Write />
+              </Suspense>
+            </Route>
             <Route path="/:story">
               <Suspense fallback={<div />}>
                 {header}
@@ -82,7 +89,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
-        {user?.id === 0 && modalOpen && (
+        {!user?.id && modalOpen && (
           <LoginModal
             open={modalOpen}
             setOpen={setModalOpen}

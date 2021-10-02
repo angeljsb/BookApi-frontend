@@ -1,10 +1,12 @@
 import { useState } from "react";
 import useGet from "../Hooks/useGet";
+import { ImStarEmpty, ImStarHalf, ImStarFull } from "react-icons/im";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp, MdDone } from "react-icons/md";
 import "../styles/accordion.css";
 import "../styles/check.css";
 import "../styles/spinner.css";
 import "../styles/genres-tags.css";
+import "../styles/rating.css";
 
 const Accordion = (props = {}) => {
   const children = props.children;
@@ -111,4 +113,38 @@ const Genre = (props = {}) => {
   );
 };
 
-export { Accordion, Check, Logo, Spinner, Tag, Genre };
+const Rating = (props = {}) => {
+  const { rating, ...otherProps } = props;
+
+  const stars = (rating) => {
+    let rest = rating;
+    const stars = [];
+    const size = "1rem";
+    const color = "#ffd10f";
+
+    for (let i = 0; i < 5; i++) {
+      const attributes = {
+        color,
+        size,
+        key: i,
+      };
+      if (rest >= 1) {
+        stars.push(<ImStarFull {...attributes} />);
+        rest -= 1;
+        continue;
+      }
+      if (rest >= 0.5) {
+        stars.push(<ImStarHalf {...attributes} />);
+        rest = 0;
+        continue;
+      }
+      stars.push(<ImStarEmpty {...attributes} />);
+    }
+
+    return stars;
+  };
+
+  return <div className="ratings">{stars(rating)}</div>;
+};
+
+export { Accordion, Check, Logo, Spinner, Tag, Genre, Rating };
