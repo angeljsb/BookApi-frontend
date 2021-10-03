@@ -90,6 +90,7 @@ const Tag = (props) => {
 
   return (
     <div className="tag" {...otherProps}>
+      <input type="hidden" name="tags" value={name} />
       <div className="tag__body">
         <span className="tag__name">{name}</span>
         {count}

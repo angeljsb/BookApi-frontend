@@ -10,6 +10,7 @@ import useGet from "./Hooks/useGet.jsx";
 const Home = React.lazy(() => import("./Pages/Home.jsx"));
 const Story = React.lazy(() => import("./Pages/Story.jsx"));
 const Write = React.lazy(() => import("./Pages/Write.jsx"));
+const EditStory = React.lazy(() => import("./Pages/EditStory.jsx"));
 
 function App() {
   const [user, setUser] = useState(null);
@@ -69,6 +70,12 @@ function App() {
       <UserContext.Provider value={user}>
         <Router>
           <Switch>
+            <Route path="/write/:story">
+              <Suspense fallback={<div />}>
+                {header}
+                <EditStory />
+              </Suspense>
+            </Route>
             <Route path="/write">
               <Suspense fallback={<div />}>
                 {header}

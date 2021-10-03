@@ -1,15 +1,17 @@
-import { Check, Tag } from "./Globals.jsx";
+import { Check, Tag, Spinner } from "./Globals.jsx";
 import "../styles/check-list.css";
 import "../styles/tags-input.css";
 import "../styles/text-input.css";
+import useGet from "../Hooks/useGet.jsx";
 
 const CheckList = (props = {}) => {
   const options = props.options || [];
-  const selected = props.selected || [];
+  const value = props.value || [];
+  const name = props.name || "";
 
   const handleClickItem = (e) => {
     const item = e.target.closest(".check-list__item");
-    const setSelected = props.onClickItem;
+    const setSelected = props.onChange;
     if (!item || !setSelected) return;
     const id = JSON.parse(item.dataset.id);
     setSelected(id);
@@ -30,15 +32,36 @@ const CheckList = (props = {}) => {
                   onChange={handleClickItem}
                   id={`check-list-item-${option.id}`}
                   readOnly
-                  name={option.name}
+                  name={name}
+                  value={option.name}
                   type="checkbox"
-                  checked={selected.includes(option.id)}
+                  checked={value.includes(option.id)}
                 ></Check>
               </div>
             </label>
           </li>
         ))}
       </ul>
+    </div>
+  );
+};
+
+const GenresCheckList = (props = {}) => {
+  const { loading, result, error } = useGet("genres");
+
+  return (
+    <div>
+      {loading && (
+        <div className="stories__load-message">
+          <Spinner size="x-small" /> Buscando los géneros
+        </div>
+      )}
+      {!loading && error && (
+        <span className="stories__error-message">
+          Falló en obtener los generos
+        </span>
+      )}
+      {result && <CheckList name="genres" options={result} {...props} />}
     </div>
   );
 };
@@ -51,8 +74,15 @@ const TagsInput = (props = {}) => {
     const value = e.target.value;
     const key = e.key;
     if (key !== "Enter" || !value) return;
+    e.preventDefault();
     onAdd(value);
     e.target.value = "";
+  };
+
+  const preventSubmit = (e) => {
+    const key = e.key;
+    if (key !== "Enter") return;
+    e.preventDefault();
   };
 
   const handleClick = (e) => {
@@ -73,6 +103,7 @@ const TagsInput = (props = {}) => {
         name="tagName"
         maxLength="20"
         onKeyUp={handleKeyUp}
+        onKeyDown={preventSubmit}
         {...otherProps}
       />
     </div>
@@ -110,4 +141,4 @@ const TextInput = (props = {}) => {
   );
 };
 
-export { CheckList, TagsInput, TextInput };
+export { CheckList, GenresCheckList, TagsInput, TextInput };

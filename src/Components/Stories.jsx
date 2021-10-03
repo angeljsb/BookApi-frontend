@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import useGet from "../Hooks/useGet";
 import { Accordion, Check, Spinner } from "./Globals.jsx";
-import { CheckList, TagsInput } from "./Input.jsx";
+import { GenresCheckList, TagsInput } from "./Input.jsx";
 import "../styles/stories.css";
 import Library from "./Library";
 
@@ -50,8 +50,6 @@ const Filters = (props = {}) => {
     onChangeFinished,
   } = props;
 
-  const { loading, result, error } = useGet("genres");
-
   return (
     <div>
       <Accordion text="Filtros">
@@ -59,23 +57,10 @@ const Filters = (props = {}) => {
           <div className="stories-filters__section">
             <h5 className="stories-filters__title">Géneros</h5>
             <div className="stories-filters__filter">
-              {loading && (
-                <div className="stories__load-message">
-                  <Spinner size="x-small" /> Buscando los géneros
-                </div>
-              )}
-              {!loading && error && (
-                <span className="stories__error-message">
-                  Falló en obtener los generos
-                </span>
-              )}
-              {result && (
-                <CheckList
-                  options={result}
-                  selected={genres}
-                  onClickItem={onClickGenre}
-                />
-              )}
+              <GenresCheckList
+                value={genres}
+                onChange={onClickGenre}
+              ></GenresCheckList>
             </div>
           </div>
           <div className="stories-filters__section">

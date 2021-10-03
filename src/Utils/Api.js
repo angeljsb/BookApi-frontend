@@ -34,9 +34,11 @@ Api.Route.prototype = {
     const tkn = storage.getItem("tkn");
 
     const headers = {
-      "Content-Type": content + "; charset=UTF-8",
       "Accept-Encoding": "*",
     };
+    if(content !== "multipart/form-data") {
+        headers["Content-Type"] = content + "; charset=UTF-8";
+    }
     if (tkn) {
       headers["Authorization"] = "Bearer " + tkn;
     }
@@ -106,7 +108,11 @@ Api.Route.prototype = {
    * @async @function
    */
   get: async function (params = {}) {
-    this._params = params;
+    if (typeof params !== "string" && !params instanceof URLSearchParams) {
+      this.params(params);
+    } else {
+      this._params = params;
+    }
     let endpoint = this.path;
     if (this._params.toString()) {
       endpoint = endpoint + "?" + this._params.toString();
@@ -123,9 +129,8 @@ Api.Route.prototype = {
    * @async @function
    */
   post: async function (params = {}) {
-    this.body(params);
     let endpoint = this.path;
-    let body = this._body;
+    let body = params;
     let content = "multipart/form-data";
     if (!(body instanceof FormData)) {
       body = JSON.stringify(body);
@@ -152,10 +157,10 @@ Api.Route.prototype = {
    * @async @function
    */
   put: async function (params = {}) {
-    this.body(params);
+    this._params = new URLSearchParams();
     this._params.append("_METHOD", "PUT");
     const endpoint = this.path + "?" + this._params.toString();
-    let body = this._body;
+    let body = params;
     let content = "multipart/form-data";
     if (!(body instanceof FormData)) {
       body = JSON.stringify(body);
@@ -182,7 +187,13 @@ Api.Route.prototype = {
    * @async @function
    */
   delete: async function (params = {}) {
-    this.params(params);
+    if (typeof params === "string") {
+      this._params = new URLSearchParams(params);
+    } else if (params instanceof URLSearchParams) {
+      this._params = params;
+    } else {
+      this.params(params);
+    }
     this._params.append("_METHOD", "DELETE");
     const endpoint = this.path + "?" + this._params.toString();
     return this.sendRequest(endpoint, {
